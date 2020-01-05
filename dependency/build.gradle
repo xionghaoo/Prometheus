@@ -24,4 +24,31 @@ dependencies {
     api "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
     api "androidx.core:core-ktx:$rootProject.coreKtxVersion"
     api "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    api "androidx.recyclerview:recyclerview:$rootProject.recyclerviewVersion"
+    // Dagger
+    api "com.google.dagger:dagger-android:$rootProject.dagger"
+    api "com.google.dagger:dagger-android-support:$rootProject.dagger"
+
+    api "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-livedata:$rootProject.lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
+    api "androidx.room:room-runtime:$rootProject.roomVersion"
+    api "androidx.paging:paging-runtime:$rootProject.pagingVersion"
+    api "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
+    api "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
+
+    // okhttp
+    api "com.squareup.okhttp3:okhttp:$rootProject.okHttpVersion"
+    api "com.google.code.gson:gson:$rootProject.gsonVersion"
+    //retrofit
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
+    // 权限检查
+    api "com.karumi:dexter:$rootProject.dexterVersion"
+}
+
+repositories {
+    mavenCentral()
 }
