@@ -31,6 +31,8 @@ ext {
     cameraxVersion = "1.0.0-alpha04"
     timberVersion = '4.7.1'
     okHttpVersion = '3.14.1'
+    zxingCoreVersion = '3.3.0'
+    legacySupportVersion = '1.0.0'
     // ----------- dependencies version end -------------
 
     // ----------- App版本管理 start ---------------

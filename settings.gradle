@@ -1,2 +1,2 @@
-include ':app', ':dependency', ':core'
+include ':app', ':dependency', ':core', ':zxing-scanner'
 rootProject.name='Prometheus'
