@@ -1,0 +1,2 @@
+include ':app', ':dependency', ':core'
+rootProject.name='Prometheus'
