@@ -23,7 +23,7 @@ class ImageUtil {
             paint.color = context.resources.getColor(R.color.color_watermark_text)
 //            paint.alpha = 70  // hex:46
             paint.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-            paint.textSize = context.resources.getDimension(R.dimen.watermark_size)
+            paint.textSize = context.resources.getDimension(R.dimen.core_watermark_size)
             paint.isAntiAlias = true
             // 获取文本矩形
             val bounds = Rect()

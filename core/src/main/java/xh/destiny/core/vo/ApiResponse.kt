@@ -7,9 +7,9 @@ import java.io.IOException
 
 class ApiResponse<T> {
 
-    public var code: Int = 0
-    public var body: T? = null
-    public var error: String? = null
+    var code: Int = 0
+    var body: T? = null
+    var error: String? = null
 
     constructor(response: Response<T>) {
 //        response = r

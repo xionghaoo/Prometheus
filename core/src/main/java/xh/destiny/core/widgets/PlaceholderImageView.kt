@@ -17,8 +17,8 @@ class PlaceholderImageView : AppCompatImageView {
         var ta: TypedArray? = null
 
         try {
-            ta = context.theme.obtainStyledAttributes(attrs, R.styleable.PlaceholderImageView, 0, 0)
-            val bg = ta.getResourceId(R.styleable.PlaceholderImageView_placeholder, R.drawable.widget_placeholder_default)
+            ta = context.theme.obtainStyledAttributes(attrs, R.styleable.CorePlaceholderImageView, 0, 0)
+            val bg = ta.getResourceId(R.styleable.CorePlaceholderImageView_core_placeholder, R.drawable.widget_placeholder_default)
             background = resources.getDrawable(bg)
             scaleType = ScaleType.CENTER_CROP
         } finally {

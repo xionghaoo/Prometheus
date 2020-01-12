@@ -91,6 +91,11 @@ class PhotoManager(context: Context, fold: String? = null) {
         context.startActivityForResult(Intent.createChooser(intent, "Select Picture"), requestCode)
     }
 
-    fun getPhotoPath() = pictureDir
+    fun getSavePath() : File {
+        if (!pictureDir.exists()) {
+            pictureDir.mkdir()
+        }
+        return pictureDir
+    }
 
 }

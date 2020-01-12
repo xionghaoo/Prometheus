@@ -8,8 +8,8 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import xh.destiny.core.R
 
-abstract class TailListAdapter<T>(private var items: ArrayList<T>,
-                                  @LayoutRes private val tailLayout: Int = R.layout.common_list_item_tail)
+abstract class ExtraListAdapter<T>(private var items: ArrayList<T>,
+                                   @LayoutRes private val tailLayout: Int = R.layout.common_list_item_tail)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class ItemViewHolder(v: View) : RecyclerView.ViewHolder(v)

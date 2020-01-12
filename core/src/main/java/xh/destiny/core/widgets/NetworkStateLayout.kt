@@ -56,10 +56,10 @@ class NetworkStateLayout : FrameLayout {
         var ta: TypedArray? = null
 
         try {
-            ta = context.theme.obtainStyledAttributes(attrs, R.styleable.NetworkStateLayout, 0, 0)
-            emptyViewId = ta.getResourceId(R.styleable.NetworkStateLayout_empty, R.layout.widget_network_default_status_empty)
-            errorViewId = ta.getResourceId(R.styleable.NetworkStateLayout_error, R.layout.widget_network_default_status_error)
-            loadingViewId = ta.getResourceId(R.styleable.NetworkStateLayout_loading, R.layout.widget_network_default_status_loading)
+            ta = context.theme.obtainStyledAttributes(attrs, R.styleable.CoreNetworkStateLayout, 0, 0)
+            emptyViewId = ta.getResourceId(R.styleable.CoreNetworkStateLayout_core_empty, R.layout.widget_network_default_status_empty)
+            errorViewId = ta.getResourceId(R.styleable.CoreNetworkStateLayout_core_error, R.layout.widget_network_default_status_error)
+            loadingViewId = ta.getResourceId(R.styleable.CoreNetworkStateLayout_core_loading, R.layout.widget_network_default_status_loading)
 
             val inflater = LayoutInflater.from(context)
             errorView = inflater.inflate(errorViewId, this, false)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package xh.destiny.core.utils
+package xh.destiny.core
 
 import android.content.Context
 import android.content.Intent
@@ -24,10 +24,8 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.LayoutRes
+import android.widget.TextView
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -39,7 +37,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 
 /**
  * Implementation of lazy that is not thread safe. Useful when you know what thread you will be
@@ -218,6 +215,26 @@ fun <T> AppCompatActivity.startPlainActivity(target: Class<T>) where T : AppComp
 
 fun <T> AppCompatActivity.startPlainActivityForResult(target: Class<T>, requestCode: Int) where T : AppCompatActivity {
     startActivityForResult(Intent(this, target), requestCode)
+}
+
+fun <T> AppCompatActivity.startActivityWithData(target: Class<T>, append: (intent: Intent) -> Unit) where T : AppCompatActivity {
+    val intent = Intent(this, target)
+    intent.also {
+        append(it)
+    }
+    startActivity(intent)
+}
+
+fun <T> List<T>.toArrayList() : ArrayList<T> {
+    val arr = ArrayList<T>()
+    this.forEach { t ->
+        arr.add(t)
+    }
+    return arr
+}
+
+fun View.assignText(@IdRes viewId: Int, text: String?) {
+    this.findViewById<TextView>(viewId).text = text
 }
 
 /**
