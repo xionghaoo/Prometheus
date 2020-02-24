@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_picture_upload_image"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="@dimen/_80dp"
+        android:layout_height="@dimen/_80dp"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/widget_picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <xh.destiny.core.widgets.CornerView
+            android:layout_width="@dimen/_4dp"
+            android:layout_height="@dimen/_4dp"
+            android:layout_gravity="start|top"
+            app:cv_direction="leftTop"
+            app:cv_color="@color/white"/>
+
+        <xh.destiny.core.widgets.CornerView
+            android:layout_width="@dimen/_4dp"
+            android:layout_height="@dimen/_4dp"
+            android:layout_gravity="start|bottom"
+            app:cv_direction="leftBottom"
+            app:cv_color="@color/white"/>
+
+        <xh.destiny.core.widgets.CornerView
+            android:layout_width="@dimen/_4dp"
+            android:layout_height="@dimen/_4dp"
+            android:layout_gravity="end|top"
+            app:cv_direction="rightTop"
+            app:cv_color="@color/white"/>
+
+        <xh.destiny.core.widgets.CornerView
+            android:layout_width="@dimen/_4dp"
+            android:layout_height="@dimen/_4dp"
+            android:layout_gravity="end|bottom"
+            app:cv_direction="rightBottom"
+            app:cv_color="@color/white"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/upload_img_delete"
+        android:layout_width="@dimen/_16dp"
+        android:layout_height="@dimen/_16dp"
+        app:srcCompat="@drawable/ic_image_delete"
+        android:layout_gravity="top|end"/>
+
+</FrameLayout>

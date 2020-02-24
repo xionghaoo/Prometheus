@@ -44,6 +44,10 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     // 权限检查
     api "com.karumi:dexter:$rootProject.dexterVersion"
+    api "com.google.android:flexbox:$rootProject.flexboxVersion"
+    // Glide
+    api "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+
 }
 
 repositories {

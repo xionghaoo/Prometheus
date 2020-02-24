@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import xh.destiny.core.BuildConfig
 import xh.destiny.core.utils.StorageUtil
 import java.io.*
 import java.lang.Exception
@@ -184,7 +185,7 @@ class DownloadService : Service() {
 
             var uri: Uri? = null
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                uri = FileProvider.getUriForFile(this, "com.ks.lion.provider", apk)
+                uri = FileProvider.getUriForFile(this, "${BuildConfig.PACKAGE_NAME}.provider", apk)
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             } else {

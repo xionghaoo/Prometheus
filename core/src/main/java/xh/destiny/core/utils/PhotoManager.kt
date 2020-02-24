@@ -16,6 +16,7 @@ import android.hardware.camera2.CameraCharacteristics
 import androidx.core.content.ContextCompat.getSystemService
 import android.hardware.camera2.CameraManager
 import android.util.Log
+import xh.destiny.core.BuildConfig
 
 
 /**
@@ -43,6 +44,8 @@ class PhotoManager(context: Context, fold: String? = null) {
      * 调起系统相机拍照
      * pic: 图片名称，如avatar.jpg
      * 回调onActivityResult的result code为Activity.RESULT_OK
+     * 在onActivityResult中获取图片
+     * val imageFile = File(photoManager.getPhotoPath(), "test_pic.jpg")
      */
     fun takePhoto(context: Activity, pictureName: String, requestCode: Int) {
         PermissionManager.checkMulti(context,
@@ -65,7 +68,7 @@ class PhotoManager(context: Context, fold: String? = null) {
             val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             val outputUri: Uri?
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                outputUri = FileProvider.getUriForFile(context, "com.ks.lion.provider", file)
+                outputUri = FileProvider.getUriForFile(context, "${BuildConfig.PACKAGE_NAME}.provider", file)
                 i.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             } else {
@@ -83,6 +86,8 @@ class PhotoManager(context: Context, fold: String? = null) {
     /**
      * 打开相册，选择照片
      * 回调onActivityResult的result code为Activity.RESULT_OK
+     * 在onActivityResult获取输入流
+     * val input: InputStream? = contentResolver.openInputStream(data.data!!)
      */
     fun selectPhoto(context: Activity, requestCode: Int) {
         val intent = Intent()
@@ -92,6 +97,13 @@ class PhotoManager(context: Context, fold: String? = null) {
     }
 
     fun getSavePath() : File {
+        if (!pictureDir.exists()) {
+            pictureDir.mkdir()
+        }
+        return pictureDir
+    }
+
+    fun getPhotoPath() : File {
         if (!pictureDir.exists()) {
             pictureDir.mkdir()
         }

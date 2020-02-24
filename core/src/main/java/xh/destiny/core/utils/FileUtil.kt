@@ -90,5 +90,20 @@ class FileUtil {
                 e.printStackTrace()
             }
         }
+
+        fun saveInputStreamToFile(input: InputStream, file: File) {
+            try {
+                FileOutputStream(file).use { output ->
+                    val buffer = ByteArray(4 * 1024) // or other buffer size
+                    var read: Int
+                    while (input.read(buffer).also { read = it } != -1) {
+                        output.write(buffer, 0, read)
+                    }
+                    output.flush()
+                }
+            } finally {
+                input.close()
+            }
+        }
     }
 }

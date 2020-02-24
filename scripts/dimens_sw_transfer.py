@@ -24,7 +24,7 @@ DP_END = 601
 # 默认尺寸文件 一般以360dp为单位
 # res_path = '../app/src/main/res'
 # os.path.abspath('.') 这里.指的是scripts文件夹，得到的结果是scripts文件的绝对路径
-res_path = '{0}/app/src/main/res'.format(os.path.abspath('.'))
+res_path = '{0}/core/src/main/res'.format(os.path.abspath('.'))
 values_folder = 'values'
 dimens_file = 'dimens.xml'
 

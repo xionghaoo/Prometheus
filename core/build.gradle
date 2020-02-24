@@ -4,12 +4,19 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    resourcePrefix 'core_'
+//    resourcePrefix 'core_'
     compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         consumerProguardFiles 'consumer-rules.pro'
+
+        manifestPlaceholders = [
+            PACKAGE_NAME : rootProject.packageName
+        ]
+
+        buildConfigField('String', 'PACKAGE_NAME', "\"${rootProject.packageName}\"")
+
     }
 
     buildTypes {
@@ -34,4 +41,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
 }
