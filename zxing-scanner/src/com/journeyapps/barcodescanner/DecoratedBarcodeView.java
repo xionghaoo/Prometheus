@@ -48,6 +48,7 @@ public class DecoratedBarcodeView extends FrameLayout {
         @Override
         public void barcodeResult(BarcodeResult result) {
             delegate.barcodeResult(result);
+            viewFinder.valueAnimator.cancel();
         }
 
         @Override

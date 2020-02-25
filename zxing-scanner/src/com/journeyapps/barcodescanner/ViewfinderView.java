@@ -16,6 +16,9 @@
 
 package com.journeyapps.barcodescanner;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,7 +28,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.R;
@@ -65,6 +70,9 @@ public class ViewfinderView extends View {
     protected Rect framingRect;
     protected Size previewSize;
 
+    public ValueAnimator valueAnimator;
+    private float animValue;
+
     // This constructor is used when the class is built from an XML resource.
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -93,6 +101,24 @@ public class ViewfinderView extends View {
         scannerAlpha = 0;
         possibleResultPoints = new ArrayList<>(MAX_RESULT_POINTS);
         lastPossibleResultPoints = new ArrayList<>(MAX_RESULT_POINTS);
+
+        valueAnimator = ValueAnimator.ofFloat(0, 1f);
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        valueAnimator.setDuration(3500);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener((anim) -> {
+            animValue = (float) anim.getAnimatedValue();
+            postInvalidate();
+//            Log.d("test_anim", "anim_value: " + animValue);
+        });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                Log.d("test_anim", "停止动画" + animValue);
+            }
+        });
+        valueAnimator.start();
     }
 
     public void setCameraPreview(CameraPreview view) {
@@ -124,6 +150,12 @@ public class ViewfinderView extends View {
 
             }
         });
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        valueAnimator.cancel();
+        super.onDetachedFromWindow();
     }
 
     protected void refreshSizes() {
@@ -167,25 +199,26 @@ public class ViewfinderView extends View {
             if (laserVisibility) {
                 paint.setColor(laserColor);
 
-                paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
-                scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
+//                paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
+//                scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
 
-                final int middle = frame.height() / 2 + frame.top;
+//                final int middle = frame.height() / 2 + frame.top;
+                final int middle = frame.top + (int) (frame.height() * animValue);
                 canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
             }
 
             final float scaleX = this.getWidth() / (float) previewSize.width;
             final float scaleY = this.getHeight() / (float) previewSize.height;
 
-            // draw the last possible result points
+            // 绘制捕捉点，影响扫描的速度，不要删除
             if (!lastPossibleResultPoints.isEmpty()) {
                 paint.setAlpha(CURRENT_POINT_OPACITY / 2);
                 paint.setColor(resultPointColor);
                 float radius = POINT_SIZE / 2.0f;
                 for (final ResultPoint point : lastPossibleResultPoints) {
                     canvas.drawCircle(
-                             (int) (point.getX() * scaleX),
-                             (int) (point.getY() * scaleY),
+                            (int) (point.getX() * scaleX),
+                            (int) (point.getY() * scaleY),
                             radius, paint
                     );
                 }
@@ -213,11 +246,12 @@ public class ViewfinderView extends View {
 
             // Request another update at the animation interval, but only repaint the laser line,
             // not the entire viewfinder mask.
-            postInvalidateDelayed(ANIMATION_DELAY,
-                    frame.left - POINT_SIZE,
-                    frame.top - POINT_SIZE,
-                    frame.right + POINT_SIZE,
-                    frame.bottom + POINT_SIZE);
+
+//            postInvalidateDelayed(ANIMATION_DELAY,
+//                    frame.left - POINT_SIZE,
+//                    frame.top - POINT_SIZE,
+//                    frame.right + POINT_SIZE,
+//                    frame.bottom + POINT_SIZE);
         }
     }
 
