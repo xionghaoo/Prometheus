@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_main.*
+import xh.destiny.core.GlideApp
 import xh.destiny.core.qrcode.ScannerActivity
 import xh.destiny.core.utils.CryptoUtil
 import xh.destiny.core.utils.PhotoManager
